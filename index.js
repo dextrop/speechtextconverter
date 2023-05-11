@@ -1,9 +1,37 @@
+// The function uses SpeechSynthesis to say a statement.
+// 'Google US English' is used as voice if 
+// found else the first selected voice is supported.
+function TextToSpeech(text) {
+    // Check if speechSynthesis is supported
+    if (!window.speechSynthesis) {
+        console.error('SpeechSynthesis is not supported in this browser.');
+        return;
+    }
+
+    let utterance = new SpeechSynthesisUtterance();
+    utterance.text = text;
+
+    utterance.volume = 1;
+    utterance.rate = 1;
+    utterance.pitch = 1.2;
+    utterance.lang = 'en-US';
+
+    let voices = window.speechSynthesis.getVoices();
+    utterance.voice = voices[0];
+
+    for (let i = 0; i < voices.length; i++) {
+        if (voices[i].name === 'Google US English') {
+            utterance.voice = voices[i];
+            break;
+        }
+    }
+
+    window.speechSynthesis.speak(utterance);
+}
+
 // The function start audio stream, this steam is futher attached to window.SpeechRecognition
 // once statement is finished callback is returned with final information.
-// The function is currently not supported for background listening, make sure the function
-// is called whenever SpeechRecognition is required.
-
-function startSpeechRecognition(callback) {
+function SpeechToText(callback) {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         console.error('getUserMedia not supported on your browser!');
         return;
@@ -52,4 +80,7 @@ function startSpeechRecognition(callback) {
     });
 }
 
-module.exports = startSpeechRecognition;
+module.exports = { 
+    TextToSpeech,
+    SpeechToText
+}

@@ -2,6 +2,11 @@
 
 ## v1.0.1- 2023-05-12
 
+- Added Texttospeach, renamed functions.
+
+
+## v1.0.1- 2023-05-12
+
 - Added CHANGELOG.md, Also updated Readme with proper example for NodeJS, Angular, ReactJS. Library is primary tested.
 
 ## v1.0.0- 2023-05-11
