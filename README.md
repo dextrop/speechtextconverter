@@ -9,6 +9,10 @@ SpeechTextConverter is a real-time speech recognition library for web applicatio
 - Simplified error handling and browser compatibility checks
 - Graceful start and stop of speech recognition
 
+## Check out demo app
+
+[Demo App Link](https://dextrop.github.io/speechtextconverter/)
+
 ## Installation
 
 You can install SpeechTextConverter using npm:
