@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run build
+      run: npm run build
+
+    - name: Determine version bump
+      id: version
+      run: |
+        version_type="patch"
+        if git log -1 --pretty=%B | grep -q "release_major"; then
+          version_type="major"
+        elif git log -1 --pretty=%B | grep -q "release_minor"; then
+          version_type="minor"
+        fi
+        echo "::set-output name=type::$version_type"
+
+    - name: Bump version and push tag
+      id: create_new_tag
+      uses: actions-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        version_type: ${{ steps.version.outputs.type }}
+
+    - name: Publish to npm
+      uses: actions/setup-node@v2
+      with:
+        registry-url: 'https://registry.npmjs.org'
+        scope: '@your_scope'
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        npm publish
