@@ -17,31 +17,61 @@ You can install SpeechTextConverter using npm:
 npm install speechtextconverter
 ```
 
-## Usage
+## How to use in ReactJS
 
-First, import the `startListening` function from the library:
+First, import the `startSpeechRecognition` function from the library:
 
 ```javascript
-const startListening = require('speechtextconverter');
+import React, { useState } from 'react';
+import startSpeechRecognition from 'speechtextconverter';
+
+function App() {
+  const [text, setText] = useState('');
+
+  const handleClick = () => {
+    startSpeechRecognition(setText);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Start Speech Recognition</button>
+      <pre>{text}</pre>
+    </div>
+  );
+}
+
+export default App;
 ```
 
-Then, call `startListening()` with a callback function that will receive the transcribed text:
+## How to use in Angular
+
+Here's a simple example of using SpeechTextConverter in a Angular application:
 
 ```javascript
-startListening((text) => {
-    console.log(text);
-});
+const startSpeechRecognition = require('speechtextconverter');
+import { ChangeDetectorRef } from '@angular/core';
+
+constructor(private cd: ChangeDetectorRef) { }
+
+startProcess() {
+    startSpeechRecognition((text) => {
+        console.log(`You said: ${text}`);
+        // .. add futher processing.
+        // Required to detect changed if any
+        this.cd.detectChanges();
+    });
+}
 ```
 
-## Example
+## How to use in NodeJS
 
-Here's a simple example of using SpeechTextConverter in a Node.js application:
+Here's a simple example of using SpeechTextConverter in a NodeJS application:
 
 ```javascript
-const startListening = require('speechtextconverter');
+const startSpeechRecognition = require('speechtextconverter');
 
-startListening((text) => {
-    console.log(`You said: ${text}`);
+startSpeechRecognition(text => {
+    console.log('Recognized text:', text);
 });
 ```
 

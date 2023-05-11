@@ -1,6 +1,6 @@
 {
   "name": "speechtextconverter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This lightweight, easy-to-integrate library enables real-time speech recognition in your web application. Using the Web Speech API's SpeechRecognition interface, it provides a simplified method to access the user's microphone, listen for spoken input, and convert that input into text.",
   "main": "index.js",
   "scripts": {
