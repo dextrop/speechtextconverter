@@ -31,17 +31,40 @@ import { TextToSpeech, SpeechToText }  from 'speechtextconverter';
 
 // Speech to text 
 // SpeechToText ( callback )
-SpeechToText((text) => {
+SpeechToText((text, language) => {
     console.log(`You said: ${text}`);
     // .. add futher processing.
     // Required to detect changed if any
-    this.cd.detectChanges();
 });
 
 // Text to speech
 // SpeechToText ( "Text to speak...." )
 TextToSpeech("Hey harry how are you?")
 ```
+
+## Language Supported for Speech to Text
+
+Here is a table listing some of the language codes supported by the library `speechtextconverter` API, along with their respective language names and countries:
+
+| Language Code | Language Name | Language Country |
+|---------------|---------------|------------------|
+| hi-IN         | Hindi         | India            |
+| en-US         | English       | United States    |
+| en-GB         | English       | United Kingdom   |
+| fr-FR         | French        | France           |
+| es-ES         | Spanish       | Spain            |
+| de-DE         | German        | Germany          |
+| it-IT         | Italian       | Italy            |
+| pt-BR         | Portuguese    | Brazil           |
+| ja-JP         | Japanese      | Japan            |
+| ko-KR         | Korean        | South Korea      |
+| zh-CN         | Chinese       | China            |
+| ru-RU         | Russian       | Russia           |
+| ar-SA         | Arabic        | Saudi Arabia     |
+| tr-TR         | Turkish       | Turkey           |
+| pl-PL         | Polish        | Poland           |
+
+Please note that this list is not exhaustive, and there are additional language codes supported by the `window.SpeechRecognition` API.
 
 ## Compatibility
 

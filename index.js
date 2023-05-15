@@ -31,7 +31,7 @@ function TextToSpeech(text) {
 
 // The function start audio stream, this steam is futher attached to window.SpeechRecognition
 // once statement is finished callback is returned with final information.
-function SpeechToText(callback) {
+function SpeechToText(callback, language) {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         console.error('getUserMedia not supported on your browser!');
         return;
@@ -48,7 +48,7 @@ function SpeechToText(callback) {
         }
 
         // Set the language to recognize (optional)
-        recognition.lang = 'en-US';
+        recognition.lang = 'en-US' || language;
 
         // Start listening when the user speaks
         recognition.onstart = () => {
